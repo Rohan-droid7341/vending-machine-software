@@ -1,0 +1,304 @@
+/* src/components/VendingMachine.css */
+
+body {
+    background-color: #f0f0f0; /* Light grey background for contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .vending-machine {
+    width: 500px; /* Adjust width as needed */
+    background: linear-gradient(145deg, #7d7d7d, #4a4a4a); /* Metallic gradient */
+    border: 5px solid #333;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Changed to column for overall layout */
+    gap: 15px;
+  }
+  
+  .main-section {
+    display: flex; /* Items grid and control panel side-by-side */
+    gap: 15px;
+  }
+  
+  /* --- Item Grid (Glass Front) --- */
+  .item-grid-container {
+    flex: 3; /* Takes more space */
+    background-color: rgba(180, 210, 230, 0.3); /* Light blue tint for glass */
+    border: 3px solid #555;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 15px;
+    max-height: 450px; /* Limit height */
+    overflow-y: auto; /* Allow scrolling if more items */
+  }
+  
+  .item-slot {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .item-slot:hover {
+   transform: scale(1.03);
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .item-slot.selected {
+    outline: 3px solid yellow;
+    box-shadow: 0 0 15px yellow;
+  }
+  
+  
+  .item-slot img {
+    max-width: 50px; /* Adjust size */
+    max-height: 50px;
+    margin-bottom: 5px;
+    object-fit: contain;
+  }
+  
+  .item-info {
+    font-size: 0.8em;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+  }
+  
+  .item-id {
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    display: inline-block;
+  }
+  
+  .item-price {
+    font-style: italic;
+  }
+  
+  .item-stock {
+      font-size: 0.7em;
+      color: #ffdddd;
+      margin-top: 3px;
+  }
+  
+  .item-stock.sold-out {
+      color: #ff6666;
+      font-weight: bold;
+  }
+  
+  /* --- Control Panel --- */
+  .control-panel {
+    flex: 1.5; /* Takes less space than grid */
+    background-color: #5a5a5a;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* --- Display Screen --- */
+  .display-screen {
+    background-color: #a0d0a0; /* Greenish LCD */
+    border: 2px solid #444;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font */
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #234d23; /* Dark green text */
+    min-height: 60px; /* Ensure minimum height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .display-line-1 {
+    min-height: 1.2em; /* Reserve space for top line */
+  }
+  
+  .display-line-2 {
+    font-size: 0.9em;
+    min-height: 1.1em; /* Reserve space for bottom line */
+    color: #336a33;
+  }
+  
+  
+  /* --- Keypad --- */
+  .keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  
+  .keypad button {
+    padding: 12px 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background: linear-gradient(145deg, #e0e0e0, #b8b8b8); /* Light grey button */
+    color: #333;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), inset 1px 1px 1px #fff;
+    transition: background 0.1s ease, box-shadow 0.1s ease;
+  }
+  
+  .keypad button:active {
+    background: linear-gradient(145deg, #b8b8b8, #e0e0e0);
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3), 1px 1px 1px #fff;
+  }
+  
+  .keypad button.clear {
+    background: linear-gradient(145deg, #ffaaaa, #cc8888); /* Reddish */
+    color: #400;
+  }
+  .keypad button.clear:active {
+    background: linear-gradient(145deg, #cc8888, #ffaaaa);
+  }
+  
+  
+  .keypad button.enter {
+    background: linear-gradient(145deg, #aaeebb, #88cc99); /* Greenish */
+    color: #040;
+    grid-column: span 1; /* Or span 2 if you want it wider */
+  }
+  .keypad button.enter:active {
+      background: linear-gradient(145deg, #88cc99, #aaeebb);
+  }
+  
+  
+  /* --- Payment Area --- */
+  .payment-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto; /* Push to bottom of control panel */
+  }
+  
+  .payment-area h4 {
+    margin: 0 0 5px 0;
+    color: #eee;
+    text-align: center;
+    font-size: 0.9em;
+    text-shadow: 1px 1px 1px #000;
+  }
+  
+  .coin-slot, .card-slot {
+    background-color: #333;
+    border: 1px solid #222;
+    height: 15px;
+    border-radius: 3px;
+    margin: 5px auto;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.7);
+  }
+  .coin-slot { width: 50px; }
+  .card-slot { width: 80px; height: 8px; }
+  
+  .payment-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
+  }
+  
+  .payment-buttons button {
+    padding: 5px 8px;
+    font-size: 0.8em;
+    background-color: #a0a0a0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  }
+  .payment-buttons button:active {
+     background-color: #888;
+     box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4);
+  }
+  
+  /* --- Dispenser --- */
+  .dispenser {
+    background-color: #2a2a2a;
+    border: 3px solid #111;
+    border-radius: 0 0 10px 10px; /* Rounded bottom */
+    min-height: 80px;
+    margin: 10px -20px -20px -20px; /* Extend to edges, slight overlap */
+    padding: 15px;
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.6);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dispenser-flap {
+    width: 60%;
+    height: 20px;
+    background-color: #444;
+    border-top: 2px solid #555;
+    position: absolute;
+    top: 0;
+    left: 20%;
+    border-radius: 0 0 5px 5px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 0.7em;
+    color: #aaa;
+  }
+  
+  .dispensed-item {
+    background-color: #fff; /* Placeholder */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer; /* Click to collect */
+    animation: dispense-anim 0.5s ease-out;
+  }
+  
+  .dispensed-item img {
+     max-width: 40px;
+     max-height: 40px;
+     display: block;
+     margin: 0 auto 3px auto;
+  }
+  
+  @keyframes dispense-anim {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Simple fade animation for messages */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  .fade-in {
+    animation: fade-in 0.3s ease-in;
+  }
