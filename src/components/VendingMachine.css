@@ -1,12 +1,13 @@
 /* src/components/VendingMachine.css */
 
 body {
-    background-color: #f0f0f0; /* Light grey background for contrast */
+    background-color: rgb(249, 249, 249); /* Light grey background for contrast */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     font-family: 'Arial', sans-serif;
+    
   }
   
   .vending-machine {
